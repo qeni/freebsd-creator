@@ -1,0 +1,95 @@
+! --- ~/.Xresources ---
+
+xterm*faceName:             Terminus
+xterm*faceSize: 		    9
+xterm*xftAntialias: 		true
+XTerm*metaSendsEscape:      true
+
+xterm*utf8: 			    1
+xterm*locale: 			    true
+xterm*scrollKey: 		    true
+xterm*savelines: 		    512
+xterm*ScrollBar: 		    false
+xterm*loginshell: 		    true
+xterm*visualBell: 		    false
+xterm*marginBell: 		    false
+xterm*fastScroll: 		    true
+xterm*jumpScroll: 		    true
+xterm*multiScroll: 		    true
+
+xterm*autoWrap: 	        true
+xterm*dynamicColors: 		true
+xterm*scrollTtyOutput: 		false
+xterm*alwaysHighlight:      true
+xterm*highlightSelection: 	true
+
+xterm*charClass: 		    33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+
+
+! --- special colors ---
+
+XTerm*background: #1a1a1a
+XTerm*foreground: #a4a6ab
+
+! --- standard colors ---
+! black
+*color0: #111111
+
+! bright_black
+*color8: #303030
+
+! red
+!*color1: #8d3c3c
+*color1: #ff0000
+
+! bright_red
+*color9: #dfb5b5
+
+! green
+! *color2: #3c8d3c
+*color2: #00FF00
+
+! bright_green
+*color10: #b5dfb5
+
+! yellow
+!*color3: #8d8d3c
+*color3: #ffff00
+
+! bright_yellow
+*color11: #dfdfb5
+
+! blue
+!*color4: #3c3c8d
+*color4: #0000ff
+
+! bright_blue
+*color12: #b5b5df
+
+! magenta
+! *color5: #8d3c8d
+! *color5: #cc00cc
+*color5: #551A8B
+
+! bright_magenta
+!*color13: #dfb5df
+*color13: #800080
+
+! cyan
+!*color6: #3c8d8d
+*color6: #00ffff
+
+! bright_cyan
+*color14: #b5dfdf
+
+! white
+*color7: #cccccc
+
+! bright_white
+*color15: #ffffff
+
+! ------------------------------------------------------------------------------
+! --- end of terminal colors section -------------------------------------------
+! ------------------------------------------------------------------------------
+
+! xrdb -merge ~/.Xresources
