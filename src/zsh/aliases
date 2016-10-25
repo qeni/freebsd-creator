@@ -1,9 +1,9 @@
 # clear the screen
 	alias c='clear'
 # ls witch colors and screen cleaning
-    alias l="clear;ls --color -lh"
+    alias l="clear;ls -lh"
 # show hidden files only
-	alias l.='ls -d .* --color=auto'
+	alias l.='ls -d .*'
 # other
     alias df='df -kTh'
     alias free='free -ht'
@@ -19,9 +19,9 @@
 # show which commands you use the most
 	alias freq='cut -f1 -d" " ~/.zsh_history | sort | uniq -c | sort -nr | head -n 30'
 # cd aliases	
-	alias ..="cd ..;clear;ls --color -lh"
-	alias ...="cd ../..;clear;ls --color -lh"
-	alias ....="cd ../../..;clear;ls --color -lh"	
+	alias ..="cd ..;clear;ls -lh"
+	alias ...="cd ../..;clear;ls -lh"
+	alias ....="cd ../../..;clear;ls -lh"	
 # Git aliases
 	alias gs="git status -sb"
 	alias gd="git diff --word-diff --color"

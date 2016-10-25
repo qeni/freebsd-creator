@@ -1,13 +1,9 @@
 # =======================================================
-set $tag1 "1: Code"
-set $tag2 "2: IRC"
-set $tag3 "3: Web"
-set $tag4 "4: Files"
-set $tag5 "5: Music"
-set $tag6 "6: Other"
-set $tag7 "7: Other"
-set $tag8 "8: Other"
-set $tag9 "9: Other"
+set $tag1 "1: www"
+set $tag2 "2: code"
+set $tag3 "3: terminal"
+set $tag4 "4: irc"
+set $tag5 "5: music"
 # =======================================================
 
 # =======================================================
@@ -82,7 +78,7 @@ bar
 # Running programs
 bindsym $mod+x exec xterm
 bindsym $mod+m exec xterm -e mocp
-bindsym $mod+n exec xterm -e mc
+bindsym $mod+n exec xterm -e mc -ac
 bindsym $mod+F4 exec xterm -e htop
 bindsym $mod+q exec xterm -e links
 
@@ -217,7 +213,7 @@ mode "$mode_system" {
 	bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
 	bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
 	bindsym r exec --no-startup-id systemctl reboot, mode "default"
-	bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+	bindsym Shift+s exec --no-startup-id sudo poweroff , mode "default"  
 
 	# back to normal: Enter or Escape
 	bindsym Return mode "default"

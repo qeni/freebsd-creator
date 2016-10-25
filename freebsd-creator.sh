@@ -141,3 +141,5 @@ cp src/vim/hide.vimrc-minimal /home/qeni/.vimrc-minimal
 if [[ "$USER" == "michal"  ]]; then
     cp conf/vim/hide.NERDTreeBookmarks /home/qeni/.NERDTreeBookmarks
 fi
+
+chmod 1777 /tmp && chmod 1777 /var/tmp

@@ -345,37 +345,37 @@ regex/i/\.(m3u|pls)$
 ### Video ###
 
 shell/i/.avi
-  Open=(mpv %f >/dev/null 2>&1 &)
+  Open=(vlc %f >/dev/null 2>&1 &)
 
 shell/i/.mp4
-  Open=(mpv %f >/dev/null 2>&1 &)
+  Open=(vlc %f >/dev/null 2>&1 &)
 
 shell/i/.divx
-  Open=(mpv %f >/dev/null 2>&1 &)
+  Open=(vlc %f >/dev/null 2>&1 &)
 
 shell/i/.mpg
-  Open=(mpv %f >/dev/null 2>&1 &)
+  Open=(vlc %f >/dev/null 2>&1 &)
 
 shell/i/.mpeg
-  Open=(mpv %f >/dev/null 2>&1 &)
+  Open=(vlc %f >/dev/null 2>&1 &)
 
 shell/i/.mkv
-  Open=(mpv %f >/dev/null 2>&1 &)
+  Open=(vlc %f >/dev/null 2>&1 &)
 
 shell/i/.rmvb
-  Open=(mpv %f >/dev/null 2>&1 &)
+  Open=(vlc %f >/dev/null 2>&1 &)
 
 shell/i/.flv
-  Open=(mpv %f >/dev/null 2>&1 &)
+  Open=(vlc %f >/dev/null 2>&1 &)
 
 shell/i/.wmv
-  Open=(mpv %f >/dev/null 2>&1 &)
+  Open=(vlc %f >/dev/null 2>&1 &)
 
 shell/i/.webm
-  Open=(mpv %f >/dev/null 2>&1 &)
+  Open=(vlc %f >/dev/null 2>&1 &)
 
 include/video
-    Open=(mpv -really-quiet -noconsolecontrols %f >/dev/null 2>&1 &)
+    Open=(vlc -really-quiet -noconsolecontrols %f >/dev/null 2>&1 &)
 
 ### Documents ###
 
