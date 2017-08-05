@@ -20,7 +20,7 @@ cecho() {
 # /etc/rc.conf
 # visudo
 cecho r "Copying :: rc.conf\n"
-cp src/rc.conf /etc/rc.conf
+sudo cp src/rc.conf /etc/rc.conf
 
 cecho g "Creating dirs :: /home/qeni\n"
 mkdir -p /home/qeni/repo
@@ -31,12 +31,14 @@ mkdir -p /home/qeni/movies
 mkdir -p /home/qeni/mountpoint
 mkdir -p /home/qeni/pictures/screenshots
 
+cecho r "Updating :: pkg\n"
+
 cecho r "Installing :: \n"
-pkg install xorg i3 i3lock i3status dmenu sudo vlc firefox gimp feh xterm htop inconsolata-ttf xcalib links scrot newsbeuter mc rtorrent zsh vim cmake python3 python curl ctags inconsolata-ttf terminus-ttf wget texmaker texlive-base wifimgr nethack
+sudo pkg install xorg i3 i3lock i3status dmenu vlc firefox gimp feh xterm htop inconsolata-ttf xcalib links scrot newsbeuter mc rtorrent zsh vim cmake python3 python curl ctags inconsolata-ttf terminus-ttf wget texmaker texlive-base wifimgr nethack
 
 cecho r "Installing :: youtube-dl\n"
-wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
-chmod a+rx /usr/local/bin/youtube-dl
+sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
+sudo chmod a+rx /usr/local/bin/youtube-dl
 
 cecho g "Modyfying :: i3\n"
 mkdir -p /home/qeni/.i3
@@ -136,5 +138,3 @@ cp src/vim/hide.vimrc-minimal /home/qeni/.vimrc-minimal
 
 # Copying NERDTree bookmarks
 cp src/vim/hide.NERDTreeBookmarks /home/qeni/.NERDTreeBookmarks
-
-chmod 1777 /tmp && chmod 1777 /var/tmp
