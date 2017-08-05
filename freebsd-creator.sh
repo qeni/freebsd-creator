@@ -37,18 +37,24 @@ mkdir -p $home/pictures/screenshots
 cecho r "Updating :: pkg\n"
 
 cecho r "Installing :: \n"
-sudo pkg install xorg i3 i3lock i3status dmenu vlc firefox gimp feh xterm htop inconsolata-ttf xcalib links scrot newsbeuter mc rtorrent zsh vim cmake python3 python curl ctags inconsolata-ttf terminus-ttf wget texmaker texlive-base wifimgr nethack36
+sudo pkg install xorg \
+# i3 i3lock i3status dmenu \
+awesome rofi \
+vlc firefox gimp feh xterm htop inconsolata-ttf xcalib links scrot newsbeuter mc rtorrent zsh vim cmake python3 python curl ctags inconsolata-ttf terminus-ttf wget texmaker texlive-base wifimgr nethack36
 
 cecho r "Installing :: youtube-dl\n"
 sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
 sudo chmod a+rx /usr/local/bin/youtube-dl
 
 cecho g "Modyfying :: i3\n"
-mkdir $home/.i3
-cp $repo/src/i3/hide.i3status.conf $home/.i3status.conf
-cp $repo/src/i3/config $home/.i3/config
-cp $repo/src/wallpapers/freebsd_wallpaper.png $home/.i3/wallpaper.png
-cp $repo/src/xinit/hide.xinitrc $home/.xinitrc
+# mkdir $home/.i3
+# cp $repo/src/i3/hide.i3status.conf $home/.i3status.conf
+# cp $repo/src/i3/config $home/.i3/config
+# cp $repo/src/wallpapers/freebsd_wallpaper.png $home/.i3/wallpaper.png
+# cp $repo/src/xinit/hide.xinitrc $home/.xinitrc
+
+cecho g "Modyfying :: awesome\n"
+cp -R $repo/src/awesome $home/.config/awesome
 
 cecho g "Modyfying :: git\n"
 cp $repo/src/git/hide.gitconfig /$repo/.gitconfig
