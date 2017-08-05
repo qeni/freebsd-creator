@@ -35,9 +35,9 @@ workspace_auto_back_and_forth yes
 
 # BORDERS ======================
 # red
-# set $bo #FF0000
+set $bo #FF0000
 # blue
-set $bo #268bd2
+# set $bo #268bd2
 # 2nd color - gray
 set $se #666666
 
@@ -52,20 +52,21 @@ bar
 {
 	colors 
 	{
-    separator #859900
-    background #002b36
+    separator #ff0000
+    # background #151515
+    background #000000
     statusline #268bd2
 
     # type              border  bg      font
-    focused_workspace   #fdf6e3 #268bd2 #fdf6e3
+    focused_workspace   #ff0000 #404040 #fdf6e3
     active_workspace    #fdf6e3 #6c71c4 #fdf6e3
-    inactive_workspace  #586e75 #002b36 #FFFFFF
+    inactive_workspace  #586e75 #090909 #FFFFFF
     urgent_workspace    #d33682 #d33682 #fdf6e3
   }
     
 	# i3bar position
-  # position top
-	position bottom
+  position top
+	# position bottom
 
   font pango:Terminus 8
 	status_command i3status
@@ -88,8 +89,10 @@ bindsym $mod+F5 exec amixer -q set Master toggle
 bindsym $mod+c kill
 
 # Start dmenu (a program launcher)
-# bindsym $mod+d exec dmenu_run -fn "-xos4-terminus-medium-r-*-*-12-*" -f -nb '#F7F7F7' -nf '#020202' -sb '#020202' -sf '#F7F7F7'
-bindsym $mod+d exec dmenu_run -fn "-xos4-terminus-medium-r-*-*-12-*" -f -nb '#002b36' -nf '#FFFFFF' -sb '#268bd2' -sf '#F7F7F7'
+# white-black
+bindsym $mod+d exec dmenu_run -fn "-xos4-terminus-medium-r-*-*-12-*" -f -nb '#F7F7F7' -nf '#020202' -sb '#020202' -sf '#F7F7F7'
+# solarized-dark
+# bindsym $mod+d exec dmenu_run -fn "-xos4-terminus-medium-r-*-*-12-*" -f -nb '#002b36' -nf '#FFFFFF' -sb '#268bd2' -sf '#F7F7F7'
 
 # Open menu with system commands
 bindsym $mod+F2 mode "$mode_system"
@@ -98,7 +101,7 @@ bindsym $mod+F2 mode "$mode_system"
 bindsym --release Print exec scrot -s $HOME/pictures/screenshots/%y-%m-%d_%H:%M:%S_screenshot.png
 
 # Code environment
-bindsym --release $mod+p exec $HOME/.i3/load_code.sh
+bindsym --release $mod+i exec $HOME/.i3/load_code.sh
 
 # Change focused window
 bindsym $mod+h focus left
@@ -169,7 +172,7 @@ bindsym $mod+Shift+9 move container to workspace $tag9
 workspace $tag6 output HDMI1
 workspace $tag7 output VGA1
 
-# for_window [workspace=$tag8] floating enable
+for_window [workspace=$tag8] floating enable
 
 # Assign programs to specific workspace
 assign [class="(?i)Chromium"] $tag1
@@ -181,8 +184,8 @@ bindsym $mod+F12 exec amixer set Master 5%+
 bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
 
 # Brightness control
-bindsym $mod+F9 exec xbacklight -dec 5
-bindsym $mod+F10 exec xbacklight -inc 5
+bindsym $mod+F9 exec xrandr --output LVDS-1 --brightness 0.5
+bindsym $mod+F10 exec xrandr --output LVDS-1 --brightness 1
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -227,18 +230,12 @@ mode "$mode_system"
 
 mode "resize" 
 {
-	set $Size 3
+	set $size 2
 	# These bindings trigger as soon as you enter the resize mode
-	bindsym j resize shrink width $Size px or $Size ppt
-	bindsym k resize grow height $Size px or $Size ppt
-	bindsym l resize shrink height $Size px or $Size ppt
-	bindsym semicolon resize grow width $Size px or $Size ppt
-
-	# Same bindings, but for the arrow keys
-	bindsym Left resize shrink width $Size px or $Size ppt
-	bindsym Down resize grow height $Size px or $Size ppt
-	bindsym Up resize shrink height $Size px or $Size ppt
-	bindsym Right resize grow width $Size px or $Size ppt
+	bindsym l resize shrink width $size px or $size ppt
+	bindsym h resize grow width $size px or $size ppt
+	bindsym k resize grow height $size px or $size ppt
+	bindsym j resize shrink height $size px or $size ppt
 
 	# Back to normal: Enter or Escape
 	bindsym Return mode "default"

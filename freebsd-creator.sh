@@ -1,5 +1,8 @@
 #!/usr/local/bin/bash
 
+repo="/home/qeni/repo/freebsd-creator"
+home="/home/qeni"
+
 cecho() {
   local code="\033["
   case "$1" in
@@ -20,121 +23,119 @@ cecho() {
 # /etc/rc.conf
 # visudo
 cecho r "Copying :: rc.conf\n"
-sudo cp src/rc.conf /etc/rc.conf
+sudo cp $repo/src/rc.conf /etc/rc.conf
 
-cecho g "Creating dirs :: /home/qeni\n"
-mkdir -p /home/qeni/repo
-mkdir -p /home/qeni/tmp
-mkdir -p /home/qeni/src
-mkdir -p /home/qeni/music
-mkdir -p /home/qeni/movies
-mkdir -p /home/qeni/mountpoint
-mkdir -p /home/qeni/pictures/screenshots
+cecho g "Creating dirs :: /$repo\n"
+mkdir -p $home/repo
+mkdir $home/tmp
+mkdir $home/src
+mkdir $home/music
+mkdir $home/movies
+mkdir $home/mnt
+mkdir -p $home/pictures/screenshots
 
 cecho r "Updating :: pkg\n"
 
 cecho r "Installing :: \n"
-sudo pkg install xorg i3 i3lock i3status dmenu vlc firefox gimp feh xterm htop inconsolata-ttf xcalib links scrot newsbeuter mc rtorrent zsh vim cmake python3 python curl ctags inconsolata-ttf terminus-ttf wget texmaker texlive-base wifimgr nethack
+sudo pkg install xorg i3 i3lock i3status dmenu vlc firefox gimp feh xterm htop inconsolata-ttf xcalib links scrot newsbeuter mc rtorrent zsh vim cmake python3 python curl ctags inconsolata-ttf terminus-ttf wget texmaker texlive-base wifimgr nethack36
 
 cecho r "Installing :: youtube-dl\n"
 sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
 sudo chmod a+rx /usr/local/bin/youtube-dl
 
 cecho g "Modyfying :: i3\n"
-mkdir -p /home/qeni/.i3
-mkdir -p /home/qeni/pictures/screenshots
-cp src/i3/hide.i3status.conf /home/qeni/.i3status.conf
-cp src/i3/config /home/qeni/.i3/config
-cp src/wallpapers/freebsd_wallpaper.png /home/qeni/.i3/wallpaper.png
-cp src/xinit/hide.xinitrc /home/qeni/.xinitrc
+mkdir $home/.i3
+cp $repo/src/i3/hide.i3status.conf $home/.i3status.conf
+cp $repo/src/i3/config $home/.i3/config
+cp $repo/src/wallpapers/freebsd_wallpaper.png $home/.i3/wallpaper.png
+cp $repo/src/xinit/hide.xinitrc $home/.xinitrc
 
 cecho g "Modyfying :: git\n"
-cp src/git/hide.gitconfig /home/qeni/.gitconfig
+cp $repo/src/git/hide.gitconfig /$repo/.gitconfig
 
 cecho g "Modyfying :: links\n"
-mkdir -p /home/qeni/.links2
-cp src/links/* /home/qeni/.links2/
+mkdir -p $home/.links2
+cp $repo/src/links/* $home/.links2/
 
 cecho g "Modyfying :: newsbeuter\n"
-mkdir -p /home/qeni/.config/newsbeuter
-cp src/newsbeuter/urls /home/qeni/.config/newsbeuter/urls
-cp src/newsbeuter/config /home/qeni/.config/newsbeuter/config
+mkdir -p $home/.config/newsbeuter
+cp $repo/src/newsbeuter/urls $home/.config/newsbeuter/urls
+cp $repo/src/newsbeuter/config $home/.config/newsbeuter/config
 
 cecho g "Modyfying :: mc\n"
-mkdir -p /home/qeni/.config/mc
-mkdir -p /home/qeni/.local/share/mc/skins
-cp src/midnight-commander/mc.ext /home/qeni/.config/mc/mc.ext
-cp src/midnight-commander/ini /home/qeni/.config/mc/ini
-cp src/midnight-commander/*.ini /home/qeni/.local/share/mc/skins/
+mkdir -p $home/.config/mc
+mkdir -p $home/.local/share/mc/skins
+cp $repo/src/midnight-commander/mc.ext $home/.config/mc/mc.ext
+cp $repo/src/midnight-commander/ini $home/.config/mc/ini
+cp $repo/src/midnight-commander/*.ini $home/.local/share/mc/skins/
 
 cecho g "Modyfying :: rtorrent\n"
-mkdir -p /home/qeni/.rtorrent
-cp src/rtorrent/hide.rtorrent.rc /home/qeni/.rtorrent.rc
+mkdir -p $home/.rtorrent
+cp $repo/src/rtorrent/hide.rtorrent.rc $home/.rtorrent.rc
 
 cecho g "Modyfying :: zsh\n"
-cp src/zsh/hide.zshrc /home/qeni/.zshrc
+cp $repo/src/zsh/hide.zshrc $home/.zshrc
 chsh -s /usr/local/bin/zsh qeni
 
 cecho g "Modyfying :: xterm\n"
-cp src/xterm/hide.Xresources /home/qeni/.Xresources
-xrdb -merge /home/qeni/.Xresources 
+cp $repo/src/xterm/hide.Xresources $home/.Xresources
+xrdb -merge $home/.Xresources 
 
 cecho g "Modyfying :: nethack\n"
-cp src/nethack/hide.nethackrc/home/qeni/.nethackrc
+cp $repo/src/nethack/hide.nethackrc $home/.nethackrc
 
 cecho g "Copying :: scripts\n"
 
 
 cecho g "Modyfying :: vim\n"
-# Making dirs
-mkdir -p /home/qeni/.vim/autoload
-mkdir -p /home/qeni/.vim/bundle 
-mkdir -p /home/qeni/.vim/colors
+mkdir -p $home/.vim/autoload
+mkdir $home/.vim/bundle 
+mkdir $home/.vim/colors
 
 # Pathogen
-curl -LSso $HOME/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+curl -LSso $home/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 # Nerdtree
-cd /home/qeni/.vim/bundle && \
+cd $home/.vim/bundle && \
 git clone https://github.com/scrooloose/nerdtree.git
 
 # Syntastic
-cd /home/qeni/.vim/bundle && \
+cd $home/.vim/bundle && \
 git clone https://github.com/scrooloose/syntastic.git
 
 # Tagbar
-cd /home/qeni/.vim/bundle && \
+cd $home/.vim/bundle && \
 git clone https://github.com/majutsushi/tagbar
 
 # Auto-pairs
-cd /home/qeni/.vim/bundle && \
+cd $home/.vim/bundle && \
 git clone git://github.com/jiangmiao/auto-pairs.git
 
 # Neosnippet
-# cd /home/qeni/.vim/bundle
+# cd $home/.vim/bundle && \
 # git clone https://github.com/Shougo/neosnippet.vim
 # git clone https://github.com/Shougo/neosnippet-snippets
-# cp src/vim/python.snip /home/qeni/.vim/bundle/neosnippet-snippets/neosnippets/python.snip
+# cp src/vim/python.snip /$repo/.vim/bundle/neosnippet-snippets/neosnippets/python.snip
 
 # Vim-commentary
-cd /home/qeni/.vim/bundle
+cd $home/.vim/bundle && \
 git clone https://github.com/tpope/vim-commentary.git
 
 # Themes
-cp src/vim/colors/*.vim /home/qeni/.vim/colors/
+cp $repo/src/vim/colors/*.vim $home/.vim/colors/
 
 # undotree
-cd /home/qeni/.vim/bundle && \
+cd $home/.vim/bundle && \
 git clone https://github.com/mbbill/undotree
 
 # neocomplete
-cd /home/qeni/.vim/bundle/
+cd $home/.vim/bundle && \
 git clone https://github.com/Shougo/neocomplete.vim
 
 # Copying .vimrc
-cp src/vim/hide.vimrc /home/qeni/.vimrc
-cp src/vim/hide.gvimrc /home/qeni/.gvimrc
-cp src/vim/hide.vimrc-minimal /home/qeni/.vimrc-minimal
+cp /$repo/repo/freebsd-creator/src/vim/hide.vimrc /$repo/.vimrc
+cp /$repo/repo/freebsd-creator/src/vim/hide.gvimrc /$repo/.gvimrc
+cp /$repo/repo/freebsd-creator/src/vim/hide.vimrc-minimal /$repo/.vimrc-minimal
 
 # Copying NERDTree bookmarks
-cp src/vim/hide.NERDTreeBookmarks /home/qeni/.NERDTreeBookmarks
+cp /$repo/repo/freebsd-creator/src/vim/hide.NERDTreeBookmarks /$repo/.NERDTreeBookmarks
