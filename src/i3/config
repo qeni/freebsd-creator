@@ -1,19 +1,22 @@
 # =======================================================
 set $tag1 "1: www"
 set $tag2 "2: code"
-set $tag3 "3: terminal"
+set $tag3 "3: files"
 set $tag4 "4: irc"
 set $tag5 "5: music"
+set $tag6 "6: hdmi"
+set $tag7 "7: vga"
+set $tag8 "8: float"
 # =======================================================
 
 # =======================================================
 # Mod1 is Alt key, Mod4 is Win key
 set $mod Mod1
 
-font xft:Terminus 10
+font pango:Terminus 8
 
 # Really small borders and no title for windows
-for_window [class="^."] border pixel 1
+for_window [class="^."] border pixel 2
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -25,18 +28,16 @@ exec amixer sset Master unmute
 
 # Wallpaper restoring
 #exec --no-startup-id nitrogen --restore
-exec feh --bg-scale ~/pictures/wallpaper.png
+exec feh --bg-scale ~/.i3/wallpaper.png
 
 # Press again $mod+number to return to workspace you were working on
 workspace_auto_back_and_forth yes
 
 # BORDERS ======================
-# purple
-# set $bo #8A00B8
-# green
-set $bo #00FF00
 # red
 # set $bo #FF0000
+# blue
+set $bo #268bd2
 # 2nd color - gray
 set $se #666666
 
@@ -51,53 +52,53 @@ bar
 {
 	colors 
 	{
-        # Whole color settings
-        background #000000
-        statusline #666666
-        separator  #959595
+    separator #859900
+    background #002b36
+    statusline #268bd2
 
-        # Type             border  background font
-        focused_workspace  #FFFFFF #525555 #ffffff
-        active_workspace   #f7003a #5f676a #ffffff
-        inactive_workspace #333333 #222222 #888888
-        urgent_workspace   #f7003a #990000 #ffffff
-    }
+    # type              border  bg      font
+    focused_workspace   #fdf6e3 #268bd2 #fdf6e3
+    active_workspace    #fdf6e3 #6c71c4 #fdf6e3
+    inactive_workspace  #586e75 #002b36 #FFFFFF
+    urgent_workspace    #d33682 #d33682 #fdf6e3
+  }
     
 	# i3bar position
-    position top
-	# position bottom
+  # position top
+	position bottom
 
+  font pango:Terminus 8
 	status_command i3status
-    font xft: Terminus 8
 }
 # =======================================================
 
 # =======================================================
 # Bindings
 
-# Running programs
 bindsym $mod+x exec xterm
 bindsym $mod+m exec xterm -e mocp
-bindsym $mod+n exec xterm -e mc -ac
+bindsym $mod+n exec xterm -e mc
 bindsym $mod+F4 exec xterm -e htop
 bindsym $mod+q exec xterm -e links
-
 # Change keyboard layout
 bindsym $mod+F7 exec setxkbmap pl
 
+bindsym $mod+F5 exec amixer -q set Master toggle
 # Kill focused window
 bindsym $mod+c kill
 
 # Start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -fn "-xos4-terminus-medium-r-*-*-12-*" -f -nb '#FFFFFF' -nf '#000000' -sb '#000000' -sf '#FFFFFF'
-# bindsym $mod+d exec j4-dmenu-desktop
+# bindsym $mod+d exec dmenu_run -fn "-xos4-terminus-medium-r-*-*-12-*" -f -nb '#F7F7F7' -nf '#020202' -sb '#020202' -sf '#F7F7F7'
+bindsym $mod+d exec dmenu_run -fn "-xos4-terminus-medium-r-*-*-12-*" -f -nb '#002b36' -nf '#FFFFFF' -sb '#268bd2' -sf '#F7F7F7'
 
 # Open menu with system commands
 bindsym $mod+F2 mode "$mode_system"
 
 # Screenshots
-bindsym --release Print exec scrot $HOME/pictures/screenshots/%y-%m-%d_%H:%M:%S_screenshot.png
-bindsym --release $mod+Print exec scrot -s $HOME/pictures/screenshots/%y-%m-%d_%H:%M:%S_screenshot.png
+bindsym --release Print exec scrot -s $HOME/pictures/screenshots/%y-%m-%d_%H:%M:%S_screenshot.png
+
+# Code environment
+bindsym --release $mod+p exec $HOME/.i3/load_code.sh
 
 # Change focused window
 bindsym $mod+h focus left
@@ -130,8 +131,8 @@ bindsym $mod+o split v
 bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+# bindsym $mod+s layout stacking
+# bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -153,13 +154,6 @@ bindsym $mod+6 workspace $tag6
 bindsym $mod+7 workspace $tag7
 bindsym $mod+8 workspace $tag8
 bindsym $mod+9 workspace $tag9
-# and with KP
-bindsym KP_4 workspace $tag4
-bindsym KP_5 workspace $tag5
-bindsym KP_6 workspace $tag6
-bindsym KP_7 workspace $tag7
-bindsym KP_8 workspace $tag8
-bindsym KP_9 workspace $tag9
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $tag1
@@ -172,16 +166,26 @@ bindsym $mod+Shift+7 move container to workspace $tag7
 bindsym $mod+Shift+8 move container to workspace $tag8
 bindsym $mod+Shift+9 move container to workspace $tag9
 
+workspace $tag6 output HDMI1
+workspace $tag7 output VGA1
+
+# for_window [workspace=$tag8] floating enable
+
+# Assign programs to specific workspace
+assign [class="(?i)Chromium"] $tag1
+
 # Volume control
 bindsym $mod+F11 exec amixer set Master 5%-
-bindsym $mod+F12 exec amixer set Master 5%+
-bindsym $mod+F5 exec amixer sset Master toggle
 bindsym XF86AudioLowerVolume exec amixer set Master 5%-
+bindsym $mod+F12 exec amixer set Master 5%+
 bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
 
 # Brightness control
-bindsym $mod+F9 exec xcalib -c
-bindsym $mod+F10 exec xcalib -co 95 -a
+bindsym $mod+F9 exec xbacklight -dec 5
+bindsym $mod+F10 exec xbacklight -inc 5
+
+# focus the child container
+#bindsym $mod+d focus child
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
@@ -203,17 +207,17 @@ bindsym $mod+r mode "resize"
 # Shutdown, reboot, lock screen
 
 #set $Locker i3lock -c 000000 && sleep 1
-# set $Locker i3lock -i ~/pictures/i3lock-arch.png --color=ff0000
-set $Locker i3lock -i ~/pictures/i3lock-deb.png --color=ff0000
+set $Locker exec ~/.i3/i3lock_blurred.sh
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-mode "$mode_system" {
+mode "$mode_system" 
+{
     bindsym l exec --no-startup-id $Locker, mode "default"
 	bindsym e exec --no-startup-id i3-msg exit, mode "default"
 	bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
 	bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
 	bindsym r exec --no-startup-id systemctl reboot, mode "default"
-	bindsym Shift+s exec --no-startup-id sudo poweroff , mode "default"  
+	bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
 
 	# back to normal: Enter or Escape
 	bindsym Return mode "default"
@@ -221,7 +225,8 @@ mode "$mode_system" {
 }
 # =======================================================
 
-mode "resize" {
+mode "resize" 
+{
 	set $Size 3
 	# These bindings trigger as soon as you enter the resize mode
 	bindsym j resize shrink width $Size px or $Size ppt
@@ -230,10 +235,10 @@ mode "resize" {
 	bindsym semicolon resize grow width $Size px or $Size ppt
 
 	# Same bindings, but for the arrow keys
-	bindsym Right resize shrink width $Size px or $Size ppt
+	bindsym Left resize shrink width $Size px or $Size ppt
 	bindsym Down resize grow height $Size px or $Size ppt
 	bindsym Up resize shrink height $Size px or $Size ppt
-	bindsym Left resize grow width $Size px or $Size ppt
+	bindsym Right resize grow width $Size px or $Size ppt
 
 	# Back to normal: Enter or Escape
 	bindsym Return mode "default"
